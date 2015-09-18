@@ -1,0 +1,75 @@
+#+TITLE: Vagrant UV 2.x on Ubuntu 15.04
+
+* Introduction
+
+This will build the vagrant machine for the latest 2.x version of the
+UnifiedViews packages. The system will run the following software:
+
+- Unified Views 2.x
+- Virtuoso (tenforce docker)
+- MySQL
+
+It has been tested with VirtualBox 5.0.2. 
+
+The virtusoso docker image will be started up as a 
+
+* Before Starting
+
+Download "ojdbc7.jar" from the Oracle site [1]. It is to be placed in
+the directory with the VagrantFile (once downloaded).
+
+[1] http://www.oracle.com/technetwork/database/features/jdbc/jdbc-drivers-12c-download-1958347.html
+
+* Building the Vagrant Machine for Unified Views 2.0.1
+
+On the command line:
+
+- *git clone https://github.com/paulmassey42/VagrantUnifiedViews2.x.git*
+- *cd VagrantUnifiedViews2.x*
+- *vagrant plugin install vagrant-vbguest*
+- *vagrant up*
+  Possibly select you network interface connection point
+  This will take a *long* time the first time
+
+Then to make sure the GUI interface is usable from the virtual machine
+
+- *vagrant halt*
+- *vagrant up*
+
+Then it should be possible to use the virtual machine
+ 
+- Login password: /vagrant/
+
+- Select the iceweasel web-browser
+
+- access http://localhost:28080/unifiedviews
+
+  Login account  : /admin/
+  Login password : /test/
+
+- Unifiedviews functions should then be accessible.
+
+* Development Environment Included
+In the /vagrant environment, the Plugin-DevEnv is also cloned
+from the git repository. The DevEnv has been installed, so 
+the following should work.
+
+#+BEGIN_SRC bash
+cd /vagrant
+mvn archetype:generate
+--> 1360 is the eu.unifiedviews archetype
+--> Fill in other values as required for your-project
+cd your-project
+mvn package
+#+END_SRC
+
+The result of this will be a package which can be imported into
+UnifiedViews.
+
+More details: [[https://docs.google.com/document/d/1QDImj2SO5XOasG-K9EV1wdzgnZXY8jJPBSAG5J84T_Q/edit#][DPU Creation Tutorial]]
+
+* Notes:
+- Depending on the underlying system, it seems that the network
+  connections settings sometimes cause problems (*halt*, wait a while
+  and *up* again, normally clears the problem).
+- some freezes have been observed.
