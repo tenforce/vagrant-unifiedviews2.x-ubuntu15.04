@@ -46,6 +46,7 @@ Then it should be possible to use the virtual machine
 - access http://localhost:28080/unifiedviews
 
   Login account  : /admin/
+  
   Login password : /test/
 
 - Unifiedviews functions should then be accessible.
@@ -59,6 +60,7 @@ http://localhost:8890/conductor
 Access details are:
 
   Login account  : /dba/
+  
   Login password : /root/
 
 The same details should be used when connecting in the DPU
