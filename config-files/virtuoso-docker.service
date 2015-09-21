@@ -1,10 +1,15 @@
 [Unit]
 Description=Tenforce/Virtuoso Docker container
+After=docker.service
+Requires=docker.service
 
 [Service]
+Type=
 ExecStart=/usr/bin/docker start -a my-virtuoso
-ExecStartPost=/bin/sleep 1
+ExecStartPost=/bin/sleep 3
 ExecStop=/usr/bin/docker stop -a my-virtuoso
+Restart=always
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
+Alias=virtuoso.service

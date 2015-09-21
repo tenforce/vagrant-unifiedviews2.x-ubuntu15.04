@@ -11,7 +11,8 @@ UnifiedViews packages. The system will run the following software:
 
 It has been tested with VirtualBox 5.0.2. 
 
-The virtusoso docker image will be started up as a 
+*NOTE:* THIS MMACHINE SHOULD NOT BE CONNECTED TO THE INTERNET WITHOUT
+FIRST CHANGING ALL THE DEFAULT ACCOUNT/PASSWORD DETAILS.
 
 * Before Starting
 
@@ -20,7 +21,7 @@ the directory with the VagrantFile (once downloaded).
 
 [1] http://www.oracle.com/technetwork/database/features/jdbc/jdbc-drivers-12c-download-1958347.html
 
-* Building the Vagrant Machine for Unified Views 2.0.1
+* Building the Vagrant Machine for Unified Views 2.x
 
 On the command line:
 
@@ -48,6 +49,20 @@ Then it should be possible to use the virtual machine
   Login password : /test/
 
 - Unifiedviews functions should then be accessible.
+
+* Virtuoso
+The tenforce/virtuoso Docker image installed and should be 
+accessible on:
+
+http://localhost:8890/conductor
+
+Access details are:
+
+  Login account  : /dba/
+  Login password : /root/
+
+The same details should be used when connecting in the DPU
+within UnifiedViews.
 
 * Development Environment Included
 In the /vagrant environment, the Plugin-DevEnv is also cloned

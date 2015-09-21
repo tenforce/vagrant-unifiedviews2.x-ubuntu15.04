@@ -3,7 +3,7 @@
 # Install the necessary components for building and installing
 # the unifiedviews system from the github.
 #
-# This is the LATEST, 2.0.1 version (not a specific branch).
+# This is the LATEST, 2.x version (not a specific branch).
 #
 # Standard System Updates.
 apt-get install -y dkms kernel-headers kervel-devel virtualbox-guest-dkms virtualbox-guest-x11
@@ -17,6 +17,8 @@ apt-get install -y docker.io
 apt-get install -y openjdk-7-jre openjdk-7-jdk
 apt-get install -y tomcat7 git maven bash emacs nano vim
 apt-get install -y firefox dos2unix
+# Make sure clean
+dos2unix /vagrant/config-files/*
 echo "JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64" >> /etc/default/tomcat7
 
 echo "deb http://packages.comsode.eu/debian wheezy main" > /etc/apt/sources.list.d/odn.list
