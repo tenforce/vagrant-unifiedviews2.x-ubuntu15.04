@@ -4,5 +4,7 @@ Description=Tenforce/Virtuoso Docker container
 [Service]
 ExecStart=/usr/bin/docker start -a my-virtuoso
 ExecStartPost=/bin/sleep 1
-
 ExecStop=/usr/bin/docker stop -a my-virtuoso
+
+[Install]
+WantedBy=default.target

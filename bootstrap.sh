@@ -7,12 +7,16 @@
 #
 # Standard System Updates.
 apt-get install -y dkms kernel-headers kervel-devel virtualbox-guest-dkms virtualbox-guest-x11
-apt-get install -y apache2 libapache2-mod-auth-cas debconf-utils dpkg-dev build-essential quilt gdebi docker.io
+apt-get install -y apache2 libapache2-mod-auth-cas debconf-utils dpkg-dev build-essential quilt gdebi 
+
+# Install docker stuff
+apt-get install -y apparmor lxc cgroup-lite
+apt-get install -y docker.io
 
 # Now start to setup for building unified views, etc.
 apt-get install -y openjdk-7-jre openjdk-7-jdk
 apt-get install -y tomcat7 git maven bash emacs nano vim
-apt-get install -y iceweasel
+apt-get install -y firefox dos2unix
 echo "JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64" >> /etc/default/tomcat7
 
 echo "deb http://packages.comsode.eu/debian wheezy main" > /etc/apt/sources.list.d/odn.list
@@ -32,6 +36,11 @@ echo "mysql-server-5.5 mysql-server/root_password password root" | debconf-set-s
 echo "mysql-server-5.5 mysql-server-5.5/root_password_again password root" | debconf-set-selections
 echo "mysql-server-5.5 mysql-server-5.5/root_password password root" | debconf-set-selections
 
+echo "mysql-server-5.6 mysql-server/root_password_again password root" | debconf-set-selections
+echo "mysql-server-5.6 mysql-server/root_password password root" | debconf-set-selections
+echo "mysql-server-5.6 mysql-server-5.6/root_password_again password root" | debconf-set-selections
+echo "mysql-server-5.6 mysql-server-5.6/root_password password root" | debconf-set-selections
+
 echo "unifiedviews-webapp-mysql       frontend/mysql_db_password password root"| debconf-set-selections
 echo "unifiedviews-webapp-shared	frontend/mysql_dba_user	string	root" | debconf-set-selections
 echo "unifiedviews-webapp-shared      frontend/mysql_dba_password password root"| debconf-set-selections
@@ -44,10 +53,17 @@ echo "unifiedviews-backend-mysql      backend/mysql_db_user string root"| debcon
 
 ##############################################################
 # DB installations, etc which have customised values.
-
+echo "Create Docker Virtuoso Service"
+usermod -aG docker ${USER}
+systemctl start docker
 docker create --name my-virtuoso -p 8890:8890 -p 1111:1111 -e DBA_PASSWORD=root -e SPARQL_UPDATE=true -e DEFAULT_GRAPH=http://localhost:8890/DAV -v /vagrant/virtuoso/db:/var/lib/virtuoso/db tenforce/virtuoso
 
+# Make sure the docker is defined as a service
 cp -f /vagrant/config-files/virtuoso-docker.service /etc/systemd/system
+chmod +x /etc/systemd/system/virtuoso-docker.service
+# Enable the service to start at boot time
+systemctl enable virtuoso-docker.service
+systemctl start virtuoso-docker
 
 # apt-get install -y virtuoso-opensource virtuoso-vad-conductor
 
