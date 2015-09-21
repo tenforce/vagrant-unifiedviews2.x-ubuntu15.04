@@ -11,7 +11,7 @@ UnifiedViews packages. The system will run the following software:
 
 It has been tested with VirtualBox 5.0.2. 
 
-*NOTE:* THIS MMACHINE SHOULD NOT BE CONNECTED TO THE INTERNET WITHOUT
+*NOTE:* THIS MACHINE SHOULD NOT BE CONNECTED TO THE INTERNET WITHOUT
 FIRST CHANGING ALL THE DEFAULT ACCOUNT/PASSWORD DETAILS.
 
 * Before Starting
@@ -25,7 +25,7 @@ the directory with the VagrantFile (once downloaded).
 
 On the command line:
 
-- *git clone https://github.com/paulmassey42/VagrantUnifiedViews2.x.git*
+- *git clone https://github.com/tenforce/vagrant-unifiedviews2.x-ubuntu15.04.git*
 - *cd VagrantUnifiedViews2.x*
 - *vagrant plugin install vagrant-vbguest*
 - *vagrant up*
