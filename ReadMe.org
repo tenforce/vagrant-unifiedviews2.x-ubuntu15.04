@@ -45,9 +45,9 @@ Then it should be possible to use the virtual machine
 
 - access http://localhost:28080/unifiedviews
 
-  Login account  : /admin/
+     Login account  : /admin/
   
-  Login password : /test/
+     Login password : /test/
 
 - Unifiedviews functions should then be accessible.
 
@@ -55,13 +55,13 @@ Then it should be possible to use the virtual machine
 The tenforce/virtuoso Docker image installed and should be 
 accessible on:
 
-http://localhost:8890/conductor
+     http://localhost:8890/conductor
 
 Access details are:
 
-  Login account  : /dba/
+     Login account  : /dba/
   
-  Login password : /root/
+     Login password : /root/
 
 The same details should be used when connecting in the DPU
 within UnifiedViews.
