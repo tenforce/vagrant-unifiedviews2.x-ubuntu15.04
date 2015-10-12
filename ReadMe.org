@@ -14,7 +14,7 @@ software:
 
 It has been tested with VirtualBox 5.0.2. 
 
-*NOTE:* THIS MMACHINE SHOULD NOT BE CONNECTED TO THE INTERNET WITHOUT
+*NOTE:* THIS MACHINE SHOULD NOT BE CONNECTED TO THE INTERNET WITHOUT
 FIRST CHANGING ALL THE DEFAULT ACCOUNT/PASSWORD DETAILS.
 
 * Before Starting
@@ -28,7 +28,7 @@ the directory with the VagrantFile (once downloaded).
 
 On the command line:
 
-- *git clone https://github.com/paulmassey42/VagrantUnifiedViews2.x.git*
+- *git clone https://github.com/tenforce/vagrant-unifiedviews2.x-ubuntu15.04.git*
 - *cd VagrantUnifiedViews2.x*
 - *vagrant plugin install vagrant-vbguest*
 - *vagrant up*
@@ -48,8 +48,9 @@ Then it should be possible to use the virtual machine
 
 - access http://localhost:28080/unifiedviews
 
-  Login account  : /admin/
-  Login password : /test/
+     Login account  : /admin/
+  
+     Login password : /test/
 
 - Unifiedviews functions should then be accessible.
 
@@ -57,12 +58,13 @@ Then it should be possible to use the virtual machine
 The tenforce/virtuoso Docker image installed and should be 
 accessible on:
 
-http://localhost:8890/conductor
+     http://localhost:8890/conductor
 
 Access details are:
 
-  Login account  : /dba/
-  Login password : /root/
+     Login account  : /dba/
+  
+     Login password : /root/
 
 The same details should be used when connecting in the DPU
 within UnifiedViews.
