@@ -3,9 +3,12 @@
 * Introduction
 
 This will build the vagrant machine for the latest 2.x version of the
-UnifiedViews packages. The system will run the following software:
+UnifiedViews packages which has been tested to create this machine
+(other available versions can be tested by updating the VERSION
+indicator in the bootstrap.sh file). The system will run the following
+software:
 
-- Unified Views 2.x
+- Unified Views 2.1.3
 - Virtuoso (tenforce docker)
 - MySQL
 

@@ -1,18 +1,22 @@
 #!/usr/bin/env bash
 #################################################################
-# Install the necessary components for building and installing
-# the unifiedviews system from the github.
-#
-# This is the LATEST, 2.x version (not a specific branch).
-#
+# Install the necessary components for unifiedviews (packages used)
+
+#################################################################
+# This is the LATEST which has been tested (not always latest).
+VERSION=2.1.3
+
+#################################################################
 # Standard System Updates.
 apt-get install -y dkms kernel-headers kervel-devel virtualbox-guest-dkms virtualbox-guest-x11
 apt-get install -y apache2 libapache2-mod-auth-cas debconf-utils dpkg-dev build-essential quilt gdebi 
 
+#################################################################
 # Install docker stuff
 apt-get install -y apparmor lxc cgroup-lite
 apt-get install -y docker.io
 
+#################################################################
 # Now start to setup for building unified views, etc.
 apt-get install -y openjdk-7-jre openjdk-7-jdk
 apt-get install -y tomcat7 git maven bash emacs nano vim
@@ -53,13 +57,14 @@ echo "unifiedviews-backend-mysql      backend/mysql_root password root"| debconf
 echo "unifiedviews-backend-mysql      backend/mysql_db_password password root"| debconf-set-selections
 echo "unifiedviews-backend-mysql      backend/mysql_db_user string root"| debconf-set-selections
 
-##############################################################
+#################################################################
 # DB installations, etc which have customised values.
 echo "Create Docker Virtuoso Service"
 usermod -aG docker ${USER}
 systemctl start docker
 docker create --name my-virtuoso -p 8890:8890 -p 1111:1111 -e DBA_PASSWORD=root -e SPARQL_UPDATE=true -e DEFAULT_GRAPH=http://localhost:8890/DAV -v /vagrant/virtuoso/db:/var/lib/virtuoso/db tenforce/virtuoso
 
+#################################################################
 # Make sure the docker is defined as a service
 cp -f /vagrant/config-files/virtuoso-docker.service /etc/systemd/system
 chmod +x /etc/systemd/system/virtuoso-docker.service
@@ -67,15 +72,21 @@ chmod +x /etc/systemd/system/virtuoso-docker.service
 systemctl enable virtuoso-docker.service
 systemctl start virtuoso-docker
 
-# apt-get install -y virtuoso-opensource virtuoso-vad-conductor
-
+#################################################################
 apt-get install -y mysql-server
 apt-get update -y --force-yes
 
 ###############################################################
 # Unified views pulling, packaging and hopefully the installation.
-apt-get -y install unifiedviews-mysql
-apt-get -y install unifiedviews-plugins
+apt-get -y --force-yes install unifiedviews-mysql=${VERSION} \
+	unifiedviews-backend-shared=${VERSION} \
+	unifiedviews-backend-mysql=${VERSION} \
+	unifiedviews-backend=${VERSION} \
+	unifiedviews-webapp-shared=${VERSION} \
+	unifiedviews-webapp-mysql=${VERSION} \
+	unifiedviews-webapp=${VERSION} \
+	unifiedviews-plugins=${VERSION}
+apt-mark hold unifiedviews-mysql       # WILL NOT ALLOW UPDATING (at present)
 
 # Change the env (language changed to english :-))
 sed -iBAC -e 's/sk/en/g' /etc/unifiedviews/*.properties
@@ -101,6 +112,9 @@ echo "user_pref(\"browser.startup.homepage\", \"http://localhost:28080/unifiedvi
 ( cd /vagrant ; git clone https://github.com/tenforce/unifiedviews-dpus.git )
 
 ###############################################################
+# Switch off the automatic updates message
+echo "APT::Periodic::Update-Package-Lists \"0\";" > /etc/apt/apt.conf.d/10periodic
+# Cleanup as required.
 apt-get autoclean
 echo "****** done with bootstrap"
 ###############################################################
