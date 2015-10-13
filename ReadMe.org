@@ -22,8 +22,8 @@ FIRST CHANGING ALL THE DEFAULT ACCOUNT/PASSWORD DETAILS.
 The two main components which have to be installed on the host machine
 are:
 
-    install VirtualBox - 5.0.6 (https://www.virtualbox.org)
-    install Vagrant - 1.7.4 (https://www.vagrantup.com/)
+    - VirtualBox - 5.0.6 (https://www.virtualbox.org)
+    - Vagrant - 1.7.4 (https://www.vagrantup.com/)
 
 There is also a need for a command-line tool such as bash, shell, etc
 and that the paths are set correctly for 'vagrant' to be
