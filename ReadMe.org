@@ -1,7 +1,6 @@
 #+TITLE: Vagrant UV 2.x on Ubuntu 15.04
 
 * Introduction
-
 This will build the VM for the latest 2.x version of the UnifiedViews
 packages which has been tested. The system will run the following main
 software components:
@@ -10,16 +9,15 @@ software components:
 - Virtuoso ([[https://github.com/tenforce/docker-virtuoso][tenforce docker]])
 - MySQL 5.5
 
-It has been tested with VirtualBox 5.0.2.
+It has been tested with VirtualBox 5.0.2 (see "Before starting").
 
 *NOTES:*
-- newer other available versions can be tested by updating the VERSION
-  indicator in the bootstrap.sh file
+- Newer available versions can be tested by updating the VERSION
+  indicator in the bootstrap.sh file (and rebuilding the VM).
 - THIS MACHINE SHOULD NOT BE CONNECTED TO THE INTERNET WITHOUT FIRST
   CHANGING *ALL* THE DEFAULT ACCOUNT/PASSWORD DETAILS.
 
 * Before Starting
-
 The two main components which have to be installed on the host machine
 are:
 
@@ -36,8 +34,7 @@ the directory with the VagrantFile (once downloaded).
 
 [1] http://www.oracle.com/technetwork/database/features/jdbc/jdbc-drivers-12c-download-1958347.html
 
-* Building the VM with Unified Views
-
+* Building the VM
 On the command line:
 
 - *git clone https://github.com/tenforce/vagrant-unifiedviews2.x-ubuntu15.04.git*
@@ -69,7 +66,7 @@ Then it should be possible to use the virtual machine:
 
 Unified-views functions should then be accessible.
 
-* Virtuoso
+* Accessing Virtuoso
 The tenforce/virtuoso Docker image installed and should be accessible
 on: http://localhost:8890/conductor, access details are:
 
