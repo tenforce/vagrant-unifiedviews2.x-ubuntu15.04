@@ -19,6 +19,17 @@ FIRST CHANGING ALL THE DEFAULT ACCOUNT/PASSWORD DETAILS.
 
 * Before Starting
 
+The two main components which have to be installed on the host machine
+are:
+
+    install VirtualBox - 5.0.6 (https://www.virtualbox.org)
+    install Vagrant - 1.7.4 (https://www.vagrantup.com/)
+
+There is also a need for a command-line tool such as bash, shell, etc
+and that the paths are set correctly for 'vagrant' to be
+executable. These are the latest versions which have been tested
+(prior versions will not be tested).
+
 Download "ojdbc7.jar" from the Oracle site [1]. It is to be placed in
 the directory with the VagrantFile (once downloaded).
 
@@ -29,7 +40,7 @@ the directory with the VagrantFile (once downloaded).
 On the command line:
 
 - *git clone https://github.com/tenforce/vagrant-unifiedviews2.x-ubuntu15.04.git*
-- *cd VagrantUnifiedViews2.x*
+- *cd vagrant-unifiedviews2.x-ubuntu15.04*
 - *vagrant plugin install vagrant-vbguest*
 - *vagrant up*
   Possibly select you network interface connection point
