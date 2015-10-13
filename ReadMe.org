@@ -10,7 +10,7 @@ will run the following main software components:
 - Docker ([[https://www.docker.com][Homepage]])
 - Virtuoso ([[https://github.com/tenforce/docker-virtuoso][tenforce docker]])
 - MySQL 5.6 ([[https://www.mysql.com][Homepage]])
-- Tomcat7 & Java7 (Installed packages)
+- Tomcat7 & Java7 (Installed packages, assuming [[https://grips.semantic-web.at/pages/viewpage.action?pageId=50929588][DPU]] development)
 
 It has been tested using the setup described in "Before starting".
 
