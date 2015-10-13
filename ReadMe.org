@@ -7,14 +7,21 @@ will run the following main software components:
 
 - Ubuntu 15.04
 - Unified Views 2.1.3 ([[https://github.com/UnifiedViews][Github]])
+- Docker ([[https://www.docker.com][Homepage]])
 - Virtuoso ([[https://github.com/tenforce/docker-virtuoso][tenforce docker]])
-- MySQL 5.5
+- MySQL 5.6 ([[https://www.mysql.com][Homepage]])
+- Tomcat7 & Java7 (Installed packages)
 
 It has been tested using the setup described in "Before starting".
 
 *NOTES:*
 - Newer available versions can be tested by updating the VERSION
   indicator in the bootstrap.sh file (and rebuilding the VM).
+- Guest addition handling packages are also installed (as well as 
+  some of the more common text editors - emacs, nano and vim).
+- When using this for developing additional components/pipelines, they
+  *must* be periodically backed up into the /vagrant directory which
+  is shared with the host machine.
 - THIS MACHINE SHOULD NOT BE CONNECTED TO THE INTERNET WITHOUT FIRST
   CHANGING *ALL* THE DEFAULT ACCOUNT/PASSWORD DETAILS.
 
@@ -93,9 +100,12 @@ mvn package
 #+END_SRC
 
 The result of this will be a package which can be imported into
-UnifiedViews.
+UnifiedViews. More details: [[https://docs.google.com/document/d/1QDImj2SO5XOasG-K9EV1wdzgnZXY8jJPBSAG5J84T_Q/edit#][DPU Creation Tutorial]]
 
-More details: [[https://docs.google.com/document/d/1QDImj2SO5XOasG-K9EV1wdzgnZXY8jJPBSAG5J84T_Q/edit#][DPU Creation Tutorial]]
+*NOTE:* Development work needs to be done in /vagrant (create a
+sub-directory). This directory will not be cleaned if a *vagrant
+destroy* is issued (all other directories will be removed in that
+case).
 
 * Notes:
 - Depending on the underlying system, it seems that the network
