@@ -12,7 +12,7 @@ software:
 - Virtuoso (tenforce docker)
 - MySQL
 
-It has been tested with VirtualBox 5.0.2. 
+It has been tested with VirtualBox 5.0.2.
 
 *NOTE:* THIS MACHINE SHOULD NOT BE CONNECTED TO THE INTERNET WITHOUT
 FIRST CHANGING ALL THE DEFAULT ACCOUNT/PASSWORD DETAILS.
@@ -35,7 +35,7 @@ the directory with the VagrantFile (once downloaded).
 
 [1] http://www.oracle.com/technetwork/database/features/jdbc/jdbc-drivers-12c-download-1958347.html
 
-* Building the Vagrant Machine for Unified Views 2.x
+* Building the VM with Unified Views
 
 On the command line:
 
@@ -51,17 +51,20 @@ Then to make sure the GUI interface is usable from the virtual machine
 - *vagrant halt*
 - *vagrant up*
 
-Then it should be possible to use the virtual machine
+Then it should be possible to use the virtual machine.
  
 - Login password: /vagrant/
 
-- Select the iceweasel web-browser
+- Select the *iceweasel* web-browser
 
-- access http://localhost:28080/unifiedviews
+  Normally, this should directly enter unifiedviews since the homepage
+  has been set.
 
-     Login account  : /admin/
-  
-     Login password : /test/
+- The homepage for unified views is: http://localhost:28080/unifiedviews
+
+  - Login account  : /admin/
+ 
+  - Login password : /test/
 
 - Unifiedviews functions should then be accessible.
 
