@@ -51,7 +51,7 @@ Then to make sure the GUI interface is usable from the virtual machine
 - *vagrant halt*
 - *vagrant up*
 
-Then it should be possible to use the virtual machine.
+Then it should be possible to use the virtual machine:
  
 - Login password: /vagrant/
 
@@ -66,22 +66,18 @@ Then it should be possible to use the virtual machine.
  
   - Login password : /test/
 
-- Unifiedviews functions should then be accessible.
+Unified-views functions should then be accessible.
 
 * Virtuoso
-The tenforce/virtuoso Docker image installed and should be 
-accessible on:
+The tenforce/virtuoso Docker image installed and should be accessible
+on: http://localhost:8890/conductor, access details are:
 
-     http://localhost:8890/conductor
-
-Access details are:
-
-     Login account  : /dba/
+- Login account  : /dba/
   
-     Login password : /root/
+- Login password : /root/
 
-The same details should be used when connecting in the DPU
-within UnifiedViews.
+The same details should be used when connecting in the DPU within
+UnifiedViews.
 
 * Development Environment Included
 In the /vagrant environment, the Plugin-DevEnv is also cloned
