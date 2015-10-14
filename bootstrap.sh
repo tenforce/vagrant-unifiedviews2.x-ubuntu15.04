@@ -8,8 +8,10 @@ VERSION=2.1.3
 
 #################################################################
 # Standard System Updates.
-apt-get install -y dkms kernel-headers kervel-devel virtualbox-guest-dkms virtualbox-guest-x11
-apt-get install -y apache2 libapache2-mod-auth-cas debconf-utils dpkg-dev build-essential quilt gdebi 
+apt-get install -y dkms kernel-headers kervel-devel \
+	virtualbox-guest-dkms virtualbox-guest-x11
+apt-get install -y apache2 libapache2-mod-auth-cas \
+	debconf-utils dpkg-dev build-essential quilt gdebi 
 
 #################################################################
 # Install docker stuff
@@ -18,6 +20,7 @@ apt-get install -y docker.io
 
 #################################################################
 # Now start to setup for building unified views, etc.
+apt-get install -y ntp                              # Time Server
 apt-get install -y openjdk-7-jre openjdk-7-jdk
 apt-get install -y tomcat7 git maven bash emacs nano vim
 apt-get install -y firefox dos2unix
@@ -32,7 +35,8 @@ apt-get update -y --force-yes
 ###############################################################
 # http://www.oracle.com/technetwork/database/features/jdbc/default-2280470.html
 # should be in this directory
-mvn install:install-file -Dfile=/vagrant/ojdbc7.jar -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=12.1.0.2.0 -Dpackaging=jar
+mvn install:install-file -Dfile=/vagrant/ojdbc7.jar -DgroupId=com.oracle \
+    -DartifactId=ojdbc7 -Dversion=12.1.0.2.0 -Dpackaging=jar
 
 ###############################################################
 # Set the default values for the debconf questions
@@ -59,13 +63,13 @@ echo "unifiedviews-backend-mysql      backend/mysql_db_user string root"| debcon
 
 #################################################################
 # DB installations, etc which have customised values.
-echo "Create Docker Virtuoso Service"
+echo "**** Create Virtuoso Docker named image"
 usermod -aG docker ${USER}
 systemctl start docker
-docker create --name my-virtuoso -p 8890:8890 -p 1111:1111 -e DBA_PASSWORD=root -e SPARQL_UPDATE=true -e DEFAULT_GRAPH=http://localhost:8890/DAV -v /vagrant/virtuoso/db:/var/lib/virtuoso/db tenforce/virtuoso
 
 #################################################################
 # Make sure the docker is defined as a service
+echo "**** Setup service"
 cp -f /vagrant/config-files/virtuoso-docker.service /etc/systemd/system
 chmod +x /etc/systemd/system/virtuoso-docker.service
 # Enable the service to start at boot time
@@ -86,7 +90,11 @@ apt-get -y --force-yes install unifiedviews-mysql=${VERSION} \
 	unifiedviews-webapp-mysql=${VERSION} \
 	unifiedviews-webapp=${VERSION} \
 	unifiedviews-plugins=${VERSION}
-apt-mark hold unifiedviews-mysql       # WILL NOT ALLOW UPDATING (at present)
+   # PREVENT UPDATING (at present)
+apt-mark hold unifiedviews-mysql unifiedviews-backend-shared \
+	 unifiedviews-backend-mysql unifiedviews-backend \
+	 unifiedviews-webapp-shared unifiedviews-webapp-mysql \
+	 unifiedviews-webapp unifiedviews-plugins 
 
 # Change the env (language changed to english :-))
 sed -iBAC -e 's/sk/en/g' /etc/unifiedviews/*.properties

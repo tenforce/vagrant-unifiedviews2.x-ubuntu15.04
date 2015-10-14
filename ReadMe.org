@@ -35,7 +35,9 @@ are:
 There is also a need for a command-line tool such as bash, shell, etc
 and that the paths are set correctly for 'vagrant' to be
 executable. These are the latest versions which have been tested
-(prior versions will not be tested).
+(prior versions will not be tested). On Windows, [[www.cygwin.org][cygwin]] could be
+installed which will provide bash along with an assortment of other
+GNU open-source tools.
 
 Download "ojdbc7.jar" from the Oracle site [1]. It is to be placed in
 the directory with the VagrantFile (once downloaded).
@@ -104,8 +106,7 @@ UnifiedViews. More details: [[https://docs.google.com/document/d/1QDImj2SO5XOasG
 
 *NOTE:* Development work needs to be done in /vagrant (create a
 sub-directory). This directory will not be cleaned if a *vagrant
-destroy* is issued (all other directories will be removed in that
-case).
+destroy* is issued (while any other VM directory).
 
 * Notes:
 - Depending on the underlying system, it seems that the network
