@@ -11,6 +11,7 @@ will run the following main software components:
 - Virtuoso ([[https://github.com/tenforce/docker-virtuoso][tenforce docker]])
 - MySQL 5.6 ([[https://www.mysql.com][Homepage]])
 - Tomcat7 & Java7 (Installed packages, assuming [[https://grips.semantic-web.at/pages/viewpage.action?pageId=50929588][DPU]] development)
+- YASGUI is also installed.
 
 It has been tested using the setup described in "Before starting".
 
@@ -87,7 +88,12 @@ on: http://localhost:8890/conductor, access details are:
 The same details should be used when connecting in the DPU within
 UnifiedViews.
 
-* Development Environment Included
+* Development Environment
+*NOTE:* Development work needs to be done in /vagrant (create a
+sub-directory). This directory will not be cleaned if a *vagrant
+destroy* is issued (while any other VM directory).
+
+** DPU Development
 In the /vagrant environment, the Plugin-DevEnv is also cloned
 from the git repository. The DevEnv has been installed, so 
 the following should work.
@@ -104,10 +110,12 @@ mvn package
 The result of this will be a package which can be imported into
 UnifiedViews. More details: [[https://docs.google.com/document/d/1QDImj2SO5XOasG-K9EV1wdzgnZXY8jJPBSAG5J84T_Q/edit#][DPU Creation Tutorial]]
 
-*NOTE:* Development work needs to be done in /vagrant (create a
-sub-directory). This directory will not be cleaned if a *vagrant
-destroy* is issued (while any other VM directory).
+** YASGUI
+Is also included using as a SPARQL querying tool.
 
+#BEGIN_SRC
+  file:///var/local/yasgui/blank.html
+#END_SRC
 * Notes:
 - Depending on the underlying system, it seems that the network
   connections settings sometimes cause problems (*halt*, wait a while

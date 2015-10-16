@@ -77,6 +77,14 @@ systemctl enable virtuoso-docker.service
 systemctl start virtuoso-docker
 
 #################################################################
+# Enable CORS on the virtuoso endpoint(requires running docker)
+
+command=echo "isql-v -U dba -P root " `cat \vagrant\config-files\CORS.sql`
+docker exec -it my-virtuoso bash \"$command\"
+# YASGUI required CORS to be enables.
+bootstrap-yasgui.sh
+
+#################################################################
 apt-get install -y mysql-server
 apt-get update -y --force-yes
 
