@@ -2,6 +2,8 @@
 #################################################################
 # Install the necessary components for unifiedviews (packages used)
 
+export PATH="/vagrant:$PATH"
+
 #################################################################
 # This is the LATEST which has been tested (not always latest).
 VERSION=2.1.3
@@ -78,9 +80,7 @@ systemctl start virtuoso-docker
 
 #################################################################
 # Enable CORS on the virtuoso endpoint(requires running docker)
-
-command=echo "isql-v -U dba -P root " `cat \vagrant\config-files\CORS.sql`
-docker exec -it my-virtuoso bash \"$command\"
+docker exec -i my-virtuoso isql-v -U dba -P root < /vagrant/config-files/CORS.sql 
 # YASGUI required CORS to be enables.
 bootstrap-yasgui.sh
 
@@ -122,10 +122,12 @@ echo "vagrant ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/vagrant
 # Change the default homepage
 echo "user_pref(\"browser.startup.homepage\", \"http://localhost:28080/unifiedviews\");" >> /etc/firefox/pref/syspref.js
 echo "user_pref(\"browser.startup.homepage\", \"http://localhost:28080/unifiedviews\");" >> /etc/firefox/syspref.js
- 
-( cd /vagrant ; git clone https://github.com/UnifiedViews/Plugin-DevEnv.git )
-( cd /vagrant/Plugin-DevEnv ; mvn install )
-( cd /vagrant ; git clone https://github.com/tenforce/unifiedviews-dpus.git )
+
+if [ ! -d "/vagrant/Plugin-DevEnv" ]; then
+    ( cd /vagrant ; git clone https://github.com/UnifiedViews/Plugin-DevEnv.git )
+    ( cd /vagrant/Plugin-DevEnv ; mvn install )
+    ( cd /vagrant ; git clone https://github.com/tenforce/unifiedviews-dpus.git )
+fi
 
 ###############################################################
 # Switch off the automatic updates message
@@ -134,3 +136,4 @@ echo "APT::Periodic::Update-Package-Lists \"0\";" > /etc/apt/apt.conf.d/10period
 apt-get autoclean
 echo "****** done with bootstrap"
 ###############################################################
+
