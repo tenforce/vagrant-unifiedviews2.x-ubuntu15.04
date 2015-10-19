@@ -3,7 +3,7 @@
 
 Vagrant.configure(2) do |config|
   config.vm.box = "boxcutter/ubuntu1504-desktop"
-  config.vm.provision :shell, path: "bootstrap.sh"
+  config.vm.provision :shell, path: "bootstrap.sh", binary: false
   config.vm.synced_folder ".", "/vagrant"
   # config.vm.network "public_network"
 
