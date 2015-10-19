@@ -1,2 +1,3 @@
 # Scripts files for linux commands are just lf
 *.sh text eol=lf
+*.sql text eol=lf

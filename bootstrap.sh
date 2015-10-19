@@ -76,12 +76,21 @@ cp -f /vagrant/config-files/virtuoso-docker.service /etc/systemd/system
 chmod +x /etc/systemd/system/virtuoso-docker.service
 # Enable the service to start at boot time
 systemctl enable virtuoso-docker.service
-systemctl start virtuoso-docker
+systemctl start virtuoso-docker           # Will take a while
 
 #################################################################
 # Enable CORS on the virtuoso endpoint(requires running docker)
+#
+# Note: Building/starting up the virtuoso docker image can take a
+# while, hence the wait here for it to go into a running state.
+#
 echo "***** Update CORS and setup YASGUI"
-docker exec -i my-virtuoso isql-v -U dba -P root < /vagrant/config-files/CORS.sql 
+until [ "`/usr/bin/docker inspect -f {{.State.Running}} my-virtuoso`" == "true" ]; do
+    echo -n "***** waiting for my-virtuoso to start - sleep 10"
+    sleep 10;
+done
+# my-virtuoso should have been started now, so enable CORS
+docker exec -i my-virtuoso isql-v -U dba -P root < /vagrant/config-files/CORS.sql
 # YASGUI required CORS to be enables.
 bootstrap-yasgui.sh
 
