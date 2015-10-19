@@ -71,7 +71,7 @@ systemctl start docker
 
 #################################################################
 # Make sure the docker is defined as a service
-echo "**** Setup service"
+echo "**** Setup virtuoso service"
 cp -f /vagrant/config-files/virtuoso-docker.service /etc/systemd/system
 chmod +x /etc/systemd/system/virtuoso-docker.service
 # Enable the service to start at boot time
@@ -80,6 +80,7 @@ systemctl start virtuoso-docker
 
 #################################################################
 # Enable CORS on the virtuoso endpoint(requires running docker)
+echo "***** Update CORS and setup YASGUI"
 docker exec -i my-virtuoso isql-v -U dba -P root < /vagrant/config-files/CORS.sql 
 # YASGUI required CORS to be enables.
 bootstrap-yasgui.sh
@@ -120,8 +121,9 @@ echo "vagrant ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/vagrant
 
 ###############################################################
 # Change the default homepage
-echo "user_pref(\"browser.startup.homepage\", \"http://localhost:28080/unifiedviews\");" >> /etc/firefox/pref/syspref.js
-echo "user_pref(\"browser.startup.homepage\", \"http://localhost:28080/unifiedviews\");" >> /etc/firefox/syspref.js
+echo "***** Setup homepage for browser"
+echo "user_pref(\"browser.startup.homepage\", \"file:///vagrant/homepage.html\");" >> /etc/firefox/pref/syspref.js
+echo "user_pref(\"browser.startup.homepage\", \"file:///vagrant/homepage.html\");" >> /etc/firefox/syspref.js
 
 if [ ! -d "/vagrant/Plugin-DevEnv" ]; then
     ( cd /vagrant ; git clone https://github.com/UnifiedViews/Plugin-DevEnv.git )

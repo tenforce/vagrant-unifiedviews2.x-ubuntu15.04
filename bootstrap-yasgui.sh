@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "**** bootstrap yasgui"
 apt-get -y install git
 mkdir -p /var/local/yasgui
 ( pushd /var/local ;
