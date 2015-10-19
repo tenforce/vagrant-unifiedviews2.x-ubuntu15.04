@@ -64,10 +64,9 @@ Then it should be possible to use the virtual machine:
  
 - Login password: /vagrant/
 
-- Select the *iceweasel* web-browser
+- Select the *firefox* web-browser
 
-  Normally, this should directly enter unifiedviews since the homepage
-  has been set.
+  Normally, this should present you a homepage from which you can access the installed software.
 
 - The homepage for unified views is: http://localhost:28080/unifiedviews
 
