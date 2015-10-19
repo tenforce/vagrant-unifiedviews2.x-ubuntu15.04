@@ -36,7 +36,7 @@ are:
 There is also a need for a command-line tool such as bash, shell, etc
 and that the paths are set correctly for 'vagrant' to be
 executable. These are the latest versions which have been tested
-(prior versions will not be tested). On Windows, [[www.cygwin.org][cygwin]] could be
+(prior versions will not be tested). On Windows, [[www.cygwin.org][cygwin]] or [[https://git-for-windows.github.io/][git bash]] could be
 installed which will provide bash along with an assortment of other
 GNU open-source tools.
 
@@ -66,8 +66,7 @@ Then it should be possible to use the virtual machine:
 
 - Select the *firefox* web-browser
 
-  Normally, this should directly enter unifiedviews since the homepage
-  has been set.
+  Normally, this should present you a homepage from which you can access the installed software.
 
 - The homepage for unified views is: http://localhost:28080/unifiedviews
 
