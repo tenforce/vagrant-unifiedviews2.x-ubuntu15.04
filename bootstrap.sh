@@ -132,10 +132,13 @@ if [ ! -d "/vagrant/Plugin-DevEnv" ]; then
 fi
 
 ###############################################################
-# Switch off the automatic updates message
-echo "APT::Periodic::Update-Package-Lists \"0\";" > /etc/apt/apt.conf.d/10periodic
 # Cleanup as required.
 apt-get autoclean
+
+###############################################################
+# Switch off the automatic updates message
+echo "APT::Periodic::Update-Package-Lists \"0\";" > /etc/apt/apt.conf.d/10periodic
+
 echo "****** done with bootstrap"
 ###############################################################
 
