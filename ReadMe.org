@@ -64,7 +64,7 @@ Then it should be possible to use the virtual machine:
  
 - Login password: /vagrant/
 
-- Select the *iceweasel* web-browser
+- Select the *firefox* web-browser
 
   Normally, this should directly enter unifiedviews since the homepage
   has been set.
