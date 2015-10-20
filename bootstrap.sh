@@ -79,22 +79,6 @@ systemctl enable virtuoso-docker.service
 systemctl start virtuoso-docker           # Will take a while
 
 #################################################################
-# Enable CORS on the virtuoso endpoint(requires running docker)
-#
-# Note: Building/starting up the virtuoso docker image can take a
-# while, hence the wait here for it to go into a running state.
-#
-echo "***** Update CORS and setup YASGUI"
-until [ "`/usr/bin/docker inspect -f {{.State.Running}} my-virtuoso`" == "true" ]; do
-    echo -n "***** waiting for my-virtuoso to start - sleep 10"
-    sleep 10;
-done
-# my-virtuoso should have been started now, so enable CORS
-docker exec -i my-virtuoso isql-v -U dba -P root < /vagrant/config-files/CORS.sql
-# YASGUI required CORS to be enables.
-bootstrap-yasgui.sh
-
-#################################################################
 apt-get install -y mysql-server
 apt-get update -y --force-yes
 
@@ -121,6 +105,23 @@ bash /usr/share/unifiedviews/dist/plugins/deploy-dpus.sh
 
 # Make sure nothing missing ...
 apt-get -f -y install 
+
+#################################################################
+# Enable CORS on the virtuoso endpoint(requires running docker)
+#
+# Note: Building/starting up the virtuoso docker image can take a
+# while, hence the wait here for it to go into a running state.
+#
+echo "***** Update CORS and setup YASGUI"
+until [ "`/usr/bin/docker inspect -f {{.State.Running}} my-virtuoso`" == "true" ]; do
+    echo -n "***** waiting for my-virtuoso to start - sleep 10"
+    sleep 10;
+done
+sleep 1m;
+# my-virtuoso should have been started now, so enable CORS
+docker exec -i my-virtuoso isql-v -U dba -P root < /vagrant/config-files/CORS.sql
+# YASGUI required CORS to be enables.
+bootstrap-yasgui.sh
 
 ###############################################################
 # Setup other services

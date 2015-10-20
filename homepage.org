@@ -14,6 +14,27 @@
   - MySQL 5.6
   - Firefox
 
+* Account Details
+** Unified Views Account Details
+- The homepage for unified views is: http://localhost:28080/unifiedviews
+
+  - Login account  : /admin/
+ 
+  - Login password : /test/
+
+Unified-views functions should then be accessible.
+
+** Accessing Virtuoso
+The tenforce/virtuoso Docker image installed and should be accessible
+on: http://localhost:8890/conductor, access details are:
+
+- Login account  : /dba/
+  
+- Login password : /root/
+
+The same details should be used when connecting in the DPU within
+UnifiedViews.
+
 * Development Environment
 
   - Files in /vagrant are shared with the host system,
@@ -45,5 +66,4 @@ Is also included using as a SPARQL querying tool.
 #BEGIN_SRC
   file:///var/local/yasgui/blank.html
 #END_SRC
-
 

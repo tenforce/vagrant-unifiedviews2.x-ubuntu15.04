@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Development Environment (UnifiedViews 2.1.3)</title>
-<!-- 2015-10-19 ma 14:30 -->
+<!-- 2015-10-19 ma 17:04 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <style type="text/css">
@@ -143,10 +143,16 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#sec-1">1. Introduction</a></li>
 <li><a href="#sec-2">2. Environment Details</a></li>
-<li><a href="#sec-3">3. Development Environment</a>
+<li><a href="#sec-3">3. Account Details</a>
 <ul>
-<li><a href="#sec-3-1">3.1. DPU Development</a></li>
-<li><a href="#sec-3-2">3.2. YASGUI</a></li>
+<li><a href="#sec-3-1">3.1. Unified Views Account Details</a></li>
+<li><a href="#sec-3-2">3.2. Accessing Virtuoso</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. Development Environment</a>
+<ul>
+<li><a href="#sec-4-1">4.1. DPU Development</a></li>
+<li><a href="#sec-4-2">4.2. YASGUI</a></li>
 </ul>
 </li>
 </ul>
@@ -186,8 +192,57 @@ The following tools are included in this environment
 </div>
 
 <div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> Development Environment</h2>
+<h2 id="sec-3"><span class="section-number-2">3</span> Account Details</h2>
 <div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Unified Views Account Details</h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li>The homepage for unified views is: <a href="http://localhost:28080/unifiedviews">http://localhost:28080/unifiedviews</a>
+
+<ul class="org-ul">
+<li>Login account  : <i>admin</i>
+</li>
+
+<li>Login password : <i>test</i>
+</li>
+</ul>
+</li>
+</ul>
+
+<p>
+Unified-views functions should then be accessible.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Accessing Virtuoso</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+The tenforce/virtuoso Docker image installed and should be accessible
+on: <a href="http://localhost:8890/conductor">http://localhost:8890/conductor</a>, access details are:
+</p>
+
+<ul class="org-ul">
+<li>Login account  : <i>dba</i>
+</li>
+
+<li>Login password : <i>root</i>
+</li>
+</ul>
+
+<p>
+The same details should be used when connecting in the DPU within
+UnifiedViews.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Development Environment</h2>
+<div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li>Files in /vagrant are shared with the host system,
 so backup of pipelines, etc. need to be moved there.
@@ -199,9 +254,9 @@ created once).
 </ul>
 </div>
 
-<div id="outline-container-sec-3-1" class="outline-3">
-<h3 id="sec-3-1"><span class="section-number-3">3.1</span> DPU Development</h3>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> DPU Development</h3>
+<div class="outline-text-3" id="text-4-1">
 <p>
 In the /vagrant environment, the Plugin-DevEnv is also cloned
 from the git repository. The DevEnv has been installed, so 
@@ -226,9 +281,9 @@ UnifiedViews. More details: <a href="https://docs.google.com/document/d/1QDImj2S
 </div>
 </div>
 
-<div id="outline-container-sec-3-2" class="outline-3">
-<h3 id="sec-3-2"><span class="section-number-3">3.2</span> YASGUI</h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> YASGUI</h3>
+<div class="outline-text-3" id="text-4-2">
 <p>
 Is also included using as a SPARQL querying tool.
 </p>
@@ -243,7 +298,7 @@ Is also included using as a SPARQL querying tool.
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2015-10-19 ma 14:30</p>
+<p class="date">Created: 2015-10-19 ma 17:04</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

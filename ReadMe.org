@@ -66,56 +66,10 @@ Then it should be possible to use the virtual machine:
 
 - Select the *firefox* web-browser
 
-  Normally, this should present you a homepage from which you can
-  access the installed software.
+  Normally, this should present you a [[file:homepage.html][homepage]] from which you can
+  access the installed software (all account details and development
+  information are provided there).
 
-- The homepage for unified views is: http://localhost:28080/unifiedviews
-
-  - Login account  : /admin/
- 
-  - Login password : /test/
-
-Unified-views functions should then be accessible.
-
-* Accessing Virtuoso
-The tenforce/virtuoso Docker image installed and should be accessible
-on: http://localhost:8890/conductor, access details are:
-
-- Login account  : /dba/
-  
-- Login password : /root/
-
-The same details should be used when connecting in the DPU within
-UnifiedViews.
-
-* Development Environment
-*NOTE:* Development work needs to be done in /vagrant (create a
-sub-directory). This directory will not be cleaned if a *vagrant
-destroy* is issued (while any other VM directory).
-
-** DPU Development
-In the /vagrant environment, the Plugin-DevEnv is also cloned
-from the git repository. The DevEnv has been installed, so 
-the following should work.
-
-#+BEGIN_SRC bash
-cd /vagrant
-mvn archetype:generate
---> 1360 is the eu.unifiedviews archetype
---> Fill in other values as required for your-project
-cd your-project
-mvn package
-#+END_SRC
-
-The result of this will be a package which can be imported into
-UnifiedViews. More details: [[https://docs.google.com/document/d/1QDImj2SO5XOasG-K9EV1wdzgnZXY8jJPBSAG5J84T_Q/edit#][DPU Creation Tutorial]]
-
-** YASGUI
-Is also included using as a SPARQL querying tool.
-
-#BEGIN_SRC
-  file:///var/local/yasgui/blank.html
-#END_SRC
 * Notes:
 - Depending on the underlying system, it seems that the network
   connections settings sometimes cause problems (*halt*, wait a while
