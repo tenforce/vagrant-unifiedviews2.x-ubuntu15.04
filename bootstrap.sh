@@ -6,7 +6,10 @@ export PATH="/vagrant:$PATH"
 
 #################################################################
 # This is the LATEST which has been tested (not always latest).
+
+SESAME=yes
 VERSION=2.1.3
+ODN_VERSION=1.1.3
 
 #################################################################
 # Standard System Updates.
@@ -98,6 +101,10 @@ apt-mark hold unifiedviews-mysql unifiedviews-backend-shared \
 	 unifiedviews-webapp-shared unifiedviews-webapp-mysql \
 	 unifiedviews-webapp unifiedviews-plugins 
 
+# Some additional packages for accessing CKAN
+apt-get -y --force-yes install odn-uv-plugins=${ODN_VERSION}
+apt-mark hold odn-uv-plugins
+
 # Change the env (language changed to english :-))
 sed -iBAC -e 's/sk/en/g' /etc/unifiedviews/*.properties
 # Make sure that the DPU's are in
@@ -124,13 +131,18 @@ docker exec -i my-virtuoso isql-v -U dba -P root < /vagrant/config-files/CORS.sq
 bootstrap-yasgui.sh
 
 ###############################################################
+if [ "${SESAME}" = "yes"]; then
+    bootstrap-sesame.sh
+fi
+
+###############################################################
 # Setup other services
 # update-rc.d unifiedviews-backend defaults
 # Allows login without password
 echo "vagrant ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/vagrant
 
 ###############################################################
-# Change the default homepage
+# Change the default homepage-
 echo "***** Setup homepage for browser"
 echo "user_pref(\"browser.startup.homepage\", \"file:///vagrant/homepage.html\");" >> /etc/firefox/pref/syspref.js
 echo "user_pref(\"browser.startup.homepage\", \"file:///vagrant/homepage.html\");" >> /etc/firefox/syspref.js
@@ -148,7 +160,5 @@ apt-get autoclean
 ###############################################################
 # Switch off the automatic updates message
 echo "APT::Periodic::Update-Package-Lists \"0\";" > /etc/apt/apt.conf.d/10periodic
-
 echo "****** done with bootstrap"
 ###############################################################
-

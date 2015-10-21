@@ -1,0 +1,16 @@
+[Unit]
+Description=Tenforce/Stardog Docker container
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+RestartSec=10
+ExecStartPre=-/usr/bin/docker kill my-stardog
+ExecStartPre=-/usr/bin/docker rm my-stardog
+ExecStart=/usr/bin/docker run --name my-stardog -p 5820:5820 tenforce/stardog-docker
+ExecStop=/usr/bin/docker stop -a my-stardog
+
+[Install]
+WantedBy=multi-user.target
+Alias=stardog.service
