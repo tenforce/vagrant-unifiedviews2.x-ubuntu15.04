@@ -131,7 +131,7 @@ docker exec -i my-virtuoso isql-v -U dba -P root < /vagrant/config-files/CORS.sq
 bootstrap-yasgui.sh
 
 ###############################################################
-if [ "${SESAME}" = "yes"]; then
+if [ "${SESAME}" = "yes" ]; then
     bootstrap-sesame.sh
 fi
 

@@ -1,49 +1,65 @@
-#+TITLE: Development Environment (UnifiedViews 2.1.3)
+#+SETUPFILE: ~/SpiderOak/Org/org-html-themes/setup/theme-readtheorg.setup
+#+TITLE: UnifiedViews - Development Environment
 
 * Introduction
 
-  The following tools are included in this environment
+The following tools are included in this development environment, with
+the main access points:
 
   - [[http://localhost:28080/unifiedviews][Unified Views 2.1.3]]
-  - [[http://localhost:8890/conductor][Virtuoso Conductor]]/[[http://localhost:1111/sparql][Virtuoso Sparql Endpoint]]
+  - [[http://localhost:8890/conductor][Virtuoso Conductor]]
+  - [[http://localhost:1111/sparql][Virtuoso Sparql Endpoint]]
   - [[file:///var/local/yasgui/blank.html][Yasgui]]
+  - [[http://localhost:8080/openrdf-sesame][Sesame (Optional if included)]]
+
+* Development Security
+The environment is intended as a disposable development evironment,
+all development work should be placed in a source code repository:
+
+- Files in /vagrant are shared with the host system, so backup of
+  pipelines, etc. need to be moved there (or preferable saved using
+  git, svn, etc.).
+
+- /vagrant/virtuoso will contain the database (will be created only
+  once by virtuoso).
+
+Vagrant VM's are intended as development environment, they are *not*
+intended to be directly connected to the internet, without changes to
+all the standard passwords and user accounts.
 
 * Environment Details
   
-  - Ubuntu 15.04
-  - MySQL 5.6
-  - Firefox
+| Ubuntu       |            15.04 |                         |
+| UnifiedViews | 2.1.3 (packages) | [[http://unifiedviews.eu/]] |
+| Virtuoso     |                7 |                         |
+| MySQL        |              5.6 |                         |
+| Firefox      |                  |                         |
+| Java         |              1.7 |                         |
+| Tomcat       |                7 |                         |
+| Maven        |                  |                         |
+| sesame       |        2.8[fn:1] | [[http://rdf4j.org/]]       |
 
 * Account Details
-** Unified Views Account Details
-- The homepage for unified views is: http://localhost:28080/unifiedviews
+- Unified Views Account Details ::
+
+  The homepage for unified views is: http://localhost:28080/unifiedviews
 
   - Login account  : /admin/
  
   - Login password : /test/
 
-Unified-views functions should then be accessible.
+- Accessing Virtuoso ::
+  The tenforce/virtuoso Docker image installed and should be
+  accessible on: http://localhost:8890/conductor, access details are:
 
-** Accessing Virtuoso
-The tenforce/virtuoso Docker image installed and should be accessible
-on: http://localhost:8890/conductor, access details are:
-
-- Login account  : /dba/
+  - Login account  : /dba/
   
-- Login password : /root/
+  - Login password : /root/
 
-The same details should be used when connecting in the DPU within
-UnifiedViews.
+  The same details should be used when connecting in the DPU within
+  UnifiedViews.
 
-* Development Environment
-
-  - Files in /vagrant are shared with the host system,
-    so backup of pipelines, etc. need to be moved there.
-
-  - /vagrant/virtuoso will contain the database (will be
-    created once).
-
-** DPU Development
+* DPU Development
 In the /vagrant environment, the Plugin-DevEnv is also cloned
 from the git repository. The DevEnv has been installed, so 
 the following should work.
@@ -60,10 +76,8 @@ mvn package
 The result of this will be a package which can be imported into
 UnifiedViews. More details: [[https://docs.google.com/document/d/1QDImj2SO5XOasG-K9EV1wdzgnZXY8jJPBSAG5J84T_Q/edit#][DPU Creation Tutorial]]
 
-** YASGUI
-Is also included using as a SPARQL querying tool.
+* Footnotes
 
-#BEGIN_SRC
-  file:///var/local/yasgui/blank.html
-#END_SRC
+[fn:1] 4.0 requires Java 1.8 and this environment has 1.7 installed at
+present.
 
