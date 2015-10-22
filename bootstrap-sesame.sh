@@ -17,6 +17,8 @@ if [ -f "/vagrant/downloads/openrdf-sesame-2.8.6-sdk.zip" ]; then
     unzip /vagrant/downloads/openrdf-sesame-2.8.6-sdk.zip
     cp /vagrant/downloads/openrdf-sesame-2.8.6/war/*.war /var/lib/tomcat7/webapps/
     cp /vagrant/config-files/tomcat7-default.sesame /etc/default/tomcat7
+    # Now block updating of tomcat (since config files have been updated)
+    apt-mark hold tomcat7
     # Replace the default in-memory configuration files
     cp /vagrant/config-files/frontend-config.properties /etc/unifiedviews/
     cp /vagrant/config-files/backend-config.properties /etc/unifiedviews/

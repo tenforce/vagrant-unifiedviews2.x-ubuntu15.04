@@ -7,7 +7,7 @@ export PATH="/vagrant:$PATH"
 #################################################################
 # This is the LATEST which has been tested (not always latest).
 
-SESAME=yes
+BST_SESAME=no
 VERSION=2.1.3
 ODN_VERSION=1.1.3
 
@@ -31,7 +31,7 @@ apt-get install -y tomcat7 git maven bash emacs nano vim
 apt-get install -y firefox dos2unix
 # Make sure clean
 dos2unix /vagrant/config-files/*
-echo "JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64" >> /etc/default/tomcat7
+# echo "JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64" >> /etc/default/tomcat7
 
 echo "deb http://packages.comsode.eu/debian wheezy main" > /etc/apt/sources.list.d/odn.list
 wget -O - http://packages.comsode.eu/key/odn.gpg.key | apt-key add -
@@ -40,6 +40,7 @@ apt-get update -y --force-yes
 ###############################################################
 # http://www.oracle.com/technetwork/database/features/jdbc/default-2280470.html
 # should be in this directory
+#
 mvn install:install-file -Dfile=/vagrant/ojdbc7.jar -DgroupId=com.oracle \
     -DartifactId=ojdbc7 -Dversion=12.1.0.2.0 -Dpackaging=jar
 
@@ -131,13 +132,11 @@ docker exec -i my-virtuoso isql-v -U dba -P root < /vagrant/config-files/CORS.sq
 bootstrap-yasgui.sh
 
 ###############################################################
-if [ "${SESAME}" = "yes" ]; then
+if [ "${BST_SESAME}" = "yes" ]; then
     bootstrap-sesame.sh
 fi
 
 ###############################################################
-# Setup other services
-# update-rc.d unifiedviews-backend defaults
 # Allows login without password
 echo "vagrant ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/vagrant
 
