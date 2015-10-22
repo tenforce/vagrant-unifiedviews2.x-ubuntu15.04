@@ -1,5 +1,6 @@
 #+SETUPFILE: ~/SpiderOak/Org/org-html-themes/setup/theme-readtheorg.setup
 #+TITLE: UnifiedViews - Development Environment
+#+AUTHOR: Paul Massey
 
 * Introduction
 
