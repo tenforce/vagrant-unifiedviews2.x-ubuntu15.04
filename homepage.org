@@ -4,19 +4,25 @@
 
 * Introduction
 
-The following tools are included in this development environment, with
-the main access points:
+The following tools are included in this development environment. It
+has the following main entry points:
 
-  - [[http://localhost:28080/unifiedviews][Unified Views 2.1.3]]
-  - [[http://localhost:8890/conductor][Virtuoso Conductor]]
-  - [[http://localhost:1111/sparql][Virtuoso Sparql Endpoint]]
-  - [[file:///var/local/yasgui/blank.html][Yasgui]]
+- [[http://localhost:28080/unifiedviews][Unified Views 2.1.3]]
 
-If setup when the VM is built, the following sesame 2.8 tools and 
-access points are also available:
+- [[http://localhost:8890/conductor][Virtuoso Conductor]]
+- [[http://localhost:1111/sparql][Virtuoso Sparql Endpoint]]
+
+- [[file:///var/local/yasgui/blank.html][Yasgui]]
+
+*Not yet completed* 
+
+If setup when the VM is initially build (in bootstrap.sh the
+enviroment variable BST_SESAME=yes, default is 'no'), the following
+sesame 2.8 tools and access points are also available:
+
+    - [[http://localhost:8080/openrdf-workbench/repositories/unifiedviews][Unifiedviews Repository]] (if 404 then not setup)
     - [[http://localhost:8080/openrdf-sesame][Sesame System]]
     - [[http://localhost:8080/openrdf-workbench][Sesame Workbench]]
-    - [[http://localhost:8080/openrdf-workbench/repositories/unifiedviews][Unifiedviews Repository]]
 
 * Development Security
 The environment is intended as a disposable development evironment,
@@ -88,6 +94,9 @@ Creation Tutorial]].
 The DPU development should be backed-up using git/svn or some such and
 that is responsibility of the DPU developer.
 
+* Known Problems
+** Sesame connection still not working correctly.
+
 * Footnotes
 
 [fn:1] 4.0 requires Java 1.8 and this environment has 1.7 installed at
@@ -96,4 +105,3 @@ present.
 [fn:2] CORS is enabled - [[http://enable-cors.org/server_virtuoso.html]]
 
 [fn:3] Copied from docker site (should be latest version).
-

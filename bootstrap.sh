@@ -7,13 +7,13 @@ export PATH="/vagrant:$PATH"
 #################################################################
 # This is the LATEST which has been tested (not always latest).
 
-BST_SESAME=no
+BST_SESAME=yes
 VERSION=2.1.3
 ODN_VERSION=1.1.3
 
 #################################################################
 # Standard System Updates.
-apt-get install -y dkms kernel-headers kervel-devel \
+apt-get install -y dkms linux-generic \
 	virtualbox-guest-dkms virtualbox-guest-x11
 apt-get install -y apache2 libapache2-mod-auth-cas \
 	debconf-utils dpkg-dev build-essential quilt gdebi 

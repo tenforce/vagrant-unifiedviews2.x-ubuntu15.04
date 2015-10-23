@@ -1,6 +1,6 @@
 #!/bin/bash
-#######################################################################
-# Install the sesame 4.0.0 store.
+#########################################################################
+# Install the sesame store (2.8.6 at present since 4.0 requires 1.8 java)
 
 if [ -f "/vagrant/downloads/openrdf-sesame-2.8.6-sdk.zip" ]; then
     pushd /vagrant/downloads
@@ -29,12 +29,13 @@ if [ -f "/vagrant/downloads/openrdf-sesame-2.8.6-sdk.zip" ]; then
      # Create the repository (requires tomcat7 to be running)
      pushd ../sesame-databases
       sleep 10;
-      /vagrant/downloads/openrdf-sesame-2.8.6/bin/console.sh <<EOF
-create remote
+      /vagrant/downloads/openrdf-sesame-2.8.6/bin/console.sh -s "http://localhost:8080/openrdf-sesame" <<EOF
+create memory
+unifiedviews
+UnifiedViews Repository
 
-unifiedviews
-unifiedviews
-UnifiedViews Repository    
+
+
 exit
 EOF
       echo "***** SESAME should be okay"
