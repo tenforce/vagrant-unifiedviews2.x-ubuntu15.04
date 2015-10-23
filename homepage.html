@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>UnifiedViews - Development Environment</title>
-<!-- 2015-10-22 do 17:02 -->
+<!-- 2015-10-23 vr 11:43 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Paul Massey" />
@@ -173,7 +173,18 @@ the main access points:
 </li>
 <li><a href="file:///var/local/yasgui/blank.html">Yasgui</a>
 </li>
-<li><a href="http://localhost:8080/openrdf-sesame">Sesame (Optional if included)</a>
+</ul>
+
+<p>
+If setup when the VM is built, the following sesame 2.8 tools and 
+access points are also available:
+</p>
+<ul class="org-ul">
+<li><a href="http://localhost:8080/openrdf-sesame">Sesame System</a>
+</li>
+<li><a href="http://localhost:8080/openrdf-workbench">Sesame Workbench</a>
+</li>
+<li><a href="http://localhost:8080/openrdf-workbench/repositories/unifiedviews">Unifiedviews Repository</a>
 </li>
 </ul>
 </div>
@@ -199,9 +210,10 @@ once by virtuoso).
 </ul>
 
 <p>
-Vagrant VM's are intended as development environment, they are <b>not</b>
-intended to be directly connected to the internet, without changes to
-all the standard passwords and user accounts.
+Vagrant VM's are intended as development environments (i.e. to be used
+behind a firewall, etc.), they are <b>not</b> intended to be directly
+connected to the internet, without changes to all the standard user
+accounts, public passwords, etc.
 </p>
 </div>
 </div>
@@ -337,9 +349,9 @@ UnifiedViews.
 <h2 id="sec-5"><span class="section-number-2">5</span> DPU Development</h2>
 <div class="outline-text-2" id="text-5">
 <p>
-In the /vagrant environment, the Plugin-DevEnv is also cloned
-from the git repository. The DevEnv has been installed, so 
-the following should work.
+In the /vagrant directory, the Plugin-DevEnv is also cloned from the
+git repository. The DevEnv has been installed, so the following should
+work.
 </p>
 
 <div class="org-src-container">
@@ -347,15 +359,21 @@ the following should work.
 <pre class="src src-bash">cd /vagrant
 mvn archetype:generate
 --&gt; 1360 is the eu.unifiedviews archetype
---&gt; Fill in other values as required for your-project
-cd your-project
+--&gt; Fill in other values as required for your-dpu-project
+cd your-dpu-project
 mvn package
 </pre>
 </div>
 
 <p>
 The result of this will be a package which can be imported into
-UnifiedViews. More details: <a href="https://docs.google.com/document/d/1QDImj2SO5XOasG-K9EV1wdzgnZXY8jJPBSAG5J84T_Q/edit#">DPU Creation Tutorial</a>
+UnifiedViews. More details on building DPUs are available in the <a href="https://docs.google.com/document/d/1QDImj2SO5XOasG-K9EV1wdzgnZXY8jJPBSAG5J84T_Q/edit#">DPU
+Creation Tutorial</a>.
+</p>
+
+<p>
+The DPU development should be backed-up using git/svn or some such and
+that is responsibility of the DPU developer.
 </p>
 </div>
 </div>
@@ -377,7 +395,7 @@ present.
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Paul Massey</p>
-<p class="date">Created: 2015-10-22 do 17:02</p>
+<p class="date">Created: 2015-10-23 vr 11:43</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

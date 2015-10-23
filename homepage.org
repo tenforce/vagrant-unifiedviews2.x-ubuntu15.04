@@ -11,7 +11,12 @@ the main access points:
   - [[http://localhost:8890/conductor][Virtuoso Conductor]]
   - [[http://localhost:1111/sparql][Virtuoso Sparql Endpoint]]
   - [[file:///var/local/yasgui/blank.html][Yasgui]]
-  - [[http://localhost:8080/openrdf-sesame][Sesame (Optional if included)]]
+
+If setup when the VM is built, the following sesame 2.8 tools and 
+access points are also available:
+    - [[http://localhost:8080/openrdf-sesame][Sesame System]]
+    - [[http://localhost:8080/openrdf-workbench][Sesame Workbench]]
+    - [[http://localhost:8080/openrdf-workbench/repositories/unifiedviews][Unifiedviews Repository]]
 
 * Development Security
 The environment is intended as a disposable development evironment,
@@ -24,24 +29,26 @@ all development work should be placed in a source code repository:
 - /vagrant/virtuoso will contain the database (will be created only
   once by virtuoso).
 
-Vagrant VM's are intended as development environment, they are *not*
-intended to be directly connected to the internet, without changes to
-all the standard passwords and user accounts.
+Vagrant VM's are intended as development environments (i.e. to be used
+behind a firewall, etc.), they are *not* intended to be directly
+connected to the internet, without changes to all the standard user
+accounts, public passwords, etc.
 
 * Environment Details
   
-| *Component*    | *Version* | *Pointer*                               | *Notes*                           |
-|----------------+-----------+-----------------------------------------+-----------------------------------|
-| Ubuntu         |     15.04 | [[http://releases.ubuntu.com/15.04/]]       | 64 bit                            |
-| UnifiedViews   |     2.1.3 | [[http://unifiedviews.eu/]]                 | Packages Installed                |
-| Virtuoso       |         7 | [[http://virtuoso.openlinksw.com]]          | tenforce/docker-virtuoso [fn:2]   |
-| MySQL          |       5.6 | [[http://dev.mysql.com/doc/refman/5.6/en/]] |                                   |
-| Firefox        |           |                                         |                                   |
-| Java           |       1.7 |                                         |                                   |
-| Tomcat         |         7 |                                         |                                   |
-| Maven          |           |                                         |                                   |
-| Sesame         |       2.8 | [[http://rdf4j.org/]]                       | [fn:1]                            |
-| common editors |         - |                                         | emacs, vim, nano                  |
+| *Component*    | *Version* | *Pointer*                               | *Notes*                         |
+|----------------+-----------+-----------------------------------------+---------------------------------|
+| Ubuntu         |     15.04 | [[http://releases.ubuntu.com/15.04/]]       | 64 bit                          |
+| UnifiedViews   |     2.1.3 | [[http://unifiedviews.eu/]]                 | Packages Installed              |
+| Virtuoso       |         7 | [[http://virtuoso.openlinksw.com]]          | tenforce/docker-virtuoso [fn:2] |
+| MySQL          |       5.6 | [[http://dev.mysql.com/doc/refman/5.6/en/]] |                                 |
+| Firefox        |           |                                         |                                 |
+| Java           |       1.7 |                                         |                                 |
+| Tomcat         |         7 |                                         |                                 |
+| Maven          |           |                                         |                                 |
+| Docker         |           |                                         | [fn:3]                                |
+| Sesame         |       2.8 | [[http://rdf4j.org/]]                       | [fn:1]                          |
+| common editors |         - |                                         | emacs, vim, nano                |
 
 * Account Details
 - [[http://localhost:28080/unifiedviews][Unified Views Account Details]] ::
@@ -60,21 +67,26 @@ all the standard passwords and user accounts.
   UnifiedViews.
 
 * DPU Development
-In the /vagrant environment, the Plugin-DevEnv is also cloned
-from the git repository. The DevEnv has been installed, so 
-the following should work.
+
+In the /vagrant directory, the Plugin-DevEnv is also cloned from the
+git repository. The DevEnv has been installed, so the following should
+work.
 
 #+BEGIN_SRC bash
 cd /vagrant
 mvn archetype:generate
 --> 1360 is the eu.unifiedviews archetype
---> Fill in other values as required for your-project
-cd your-project
+--> Fill in other values as required for your-dpu-project
+cd your-dpu-project
 mvn package
 #+END_SRC
 
 The result of this will be a package which can be imported into
-UnifiedViews. More details: [[https://docs.google.com/document/d/1QDImj2SO5XOasG-K9EV1wdzgnZXY8jJPBSAG5J84T_Q/edit#][DPU Creation Tutorial]]
+UnifiedViews. More details on building DPUs are available in the [[https://docs.google.com/document/d/1QDImj2SO5XOasG-K9EV1wdzgnZXY8jJPBSAG5J84T_Q/edit#][DPU
+Creation Tutorial]].
+
+The DPU development should be backed-up using git/svn or some such and
+that is responsibility of the DPU developer.
 
 * Footnotes
 
@@ -82,3 +94,6 @@ UnifiedViews. More details: [[https://docs.google.com/document/d/1QDImj2SO5XOasG
 present.
 
 [fn:2] CORS is enabled - [[http://enable-cors.org/server_virtuoso.html]]
+
+[fn:3] Copied from docker site (should be latest version).
+
