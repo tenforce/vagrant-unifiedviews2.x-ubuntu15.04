@@ -1,8 +1,13 @@
 FROM java:8
+##########################################################################
+#
 # Variant of: https://hub.docker.com/r/bluepeppers/stardog/~/dockerfile/
 # Main Differences:
 # - java 8 used
 # - stardog 4.0 used
+#
+# Note: Stardog is licensed so will need to be downloaded along with the
+# license key.
 
 ENV STARDOG_VERSION=stardog-4.0-RC1
 ENV STARDOG_LICENSE=stardog-license-key.bin.gz
