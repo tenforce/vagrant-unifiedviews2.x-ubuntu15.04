@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>UnifiedViews - Development Environment</title>
-<!-- 2015-10-23 vr 15:28 -->
+<!-- 2015-10-26 ma 14:45 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Paul Massey" />
@@ -166,31 +166,28 @@ for the JavaScript code in this tag.
 <div class="outline-text-2" id="text-1">
 <p>
 The following tools are included in this development environment. It
-has the following main entry points:
+has the following main entry point - <b><a href="http://localhost:28080/unifiedviews">Unified Views 2.1.3</a></b>. Other
+tools which maybe accessible (if configured) are:
 </p>
 
-<ul class="org-ul">
-<li><a href="http://localhost:28080/unifiedviews">Unified Views 2.1.3</a>
+<dl class="org-dl">
+<dt> <b>Yasgui</b> </dt><dd><ul class="org-ul">
+<li><a href="file:///var/local/yasgui/blank.html">Yasgui</a>
 </li>
+</ul>
+</dd>
 
+<dt> <b>Virtuoso</b> </dt><dd><ul class="org-ul">
 <li><a href="http://localhost:8890/conductor">Virtuoso Conductor</a>
 </li>
 <li><a href="http://localhost:1111/sparql">Virtuoso Sparql Endpoint</a>
 </li>
-
-<li><a href="file:///var/local/yasgui/blank.html">Yasgui</a>
-</li>
 </ul>
+</dd>
 
-<p>
-<b>Not yet completed</b> 
-</p>
-
-<p>
-If setup when the VM is initially build (in bootstrap.sh the
-enviroment variable BST<sub>SESAME</sub>=yes, default is 'no'), the following
-sesame 2.8 tools and access points are also available:
-</p>
+<dt> <b>Sesame (if configured)</b> </dt><dd>    If configured when the VM is initially build (in bootstrap.sh the
+enviroment variable BST<sub>SESAME</sub>=yes, default is 'no'), the
+following sesame 2.8 tools and access points are also available:
 
 <ul class="org-ul">
 <li><a href="http://localhost:8080/openrdf-workbench/repositories/unifiedviews">Unifiedviews Repository</a> (if 404 then not setup)
@@ -200,6 +197,14 @@ sesame 2.8 tools and access points are also available:
 <li><a href="http://localhost:8080/openrdf-workbench">Sesame Workbench</a>
 </li>
 </ul>
+</dd>
+
+<dt> <b>StarDog (if configured)</b> </dt><dd><ul class="org-ul">
+<li><a href="http://localhost:5820/">Stardog home</a>
+</li>
+</ul>
+</dd>
+</dl>
 </div>
 </div>
 
@@ -320,9 +325,16 @@ accounts, public passwords, etc.
 
 <tr>
 <td class="left">Sesame</td>
-<td class="right">2.8</td>
+<td class="right">2.8.1</td>
 <td class="left"><a href="http://rdf4j.org/">http://rdf4j.org/</a></td>
 <td class="left"><sup><a id="fnr.3" name="fnr.3" class="footref" href="#fn.3">3</a></sup></td>
+</tr>
+
+<tr>
+<td class="left">Stardog</td>
+<td class="right">4.0</td>
+<td class="left">&#xa0;</td>
+<td class="left"><sup><a id="fnr.4" name="fnr.4" class="footref" href="#fn.4">4</a></sup></td>
 </tr>
 
 <tr>
@@ -360,6 +372,14 @@ accounts, public passwords, etc.
 The same details should be used when connecting in the DPU within
 UnifiedViews.
 </p>
+</dd>
+
+<dt> <a href="http://localhost:5820/">StarDog (if setup)</a> </dt><dd><ul class="org-ul">
+<li>Login account  : <i>admin</i>
+</li>
+<li>Login password : <i>admin</i>
+</li>
+</ul>
 </dd>
 </dl>
 </div>
@@ -422,12 +442,16 @@ Copied from docker site (should be latest version).
 present.
 </p></div>
 
+<div class="footdef"><sup><a id="fn.4" name="fn.4" class="footnum" href="#fnr.4">4</a></sup> <p class="footpara">
+Installed via a docker.
+</p></div>
+
 
 </div>
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Paul Massey</p>
-<p class="date">Created: 2015-10-23 vr 15:28</p>
+<p class="date">Created: 2015-10-26 ma 14:45</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

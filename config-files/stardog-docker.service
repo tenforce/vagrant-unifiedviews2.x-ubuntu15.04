@@ -6,10 +6,10 @@ Requires=docker.service
 [Service]
 Restart=always
 RestartSec=10
-ExecStartPre=-/usr/bin/docker kill my-stardog
-ExecStartPre=-/usr/bin/docker rm my-stardog
-ExecStart=/usr/bin/docker run --name my-stardog -p 5820:5820 tenforce/stardog-docker
-ExecStop=/usr/bin/docker stop -a my-stardog
+# ExecStartPre=-/usr/bin/docker kill my-stardog0
+# ExecStartPre=-/usr/bin/docker rm my-stardog0
+ExecStart=/usr/bin/docker run --name=my-stardog0 -p 5820:5820 my-stardog
+ExecStop=/usr/bin/docker stop -a my-stardog0
 
 [Install]
 WantedBy=multi-user.target

@@ -1,16 +1,18 @@
 #!/bin/bash
 #########################################################################
-# Install the sesame store (2.8.6 at present since 4.0 requires 1.8 java)
+# Install the sesame store (2.8.1 at present - see unifiedviews installation)
 
-if [ -f "/vagrant/downloads/openrdf-sesame-2.8.6-sdk.zip" ]; then
+SESAME_VERSION=2.8.1
+
+if [ -f "/vagrant/downloads/openrdf-sesame-${SESAME_VERSION}-sdk.zip" ]; then
     pushd /vagrant/downloads
      service tomcat7 stop
      service unifiedviews-backend stop
      service unifiedviews-frontend stop
     
      mkdir -p /vagrant/sesame-databases
-     unzip /vagrant/downloads/openrdf-sesame-2.8.6-sdk.zip
-     cp /vagrant/downloads/openrdf-sesame-2.8.6/war/*.war /var/lib/tomcat7/webapps/
+     unzip /vagrant/downloads/openrdf-sesame-${SESAME_VERSION}-sdk.zip
+     cp /vagrant/downloads/openrdf-sesame-${SESAME_VERSION}/war/*.war /var/lib/tomcat7/webapps/
      cp /vagrant/config-files/tomcat7-default.sesame /etc/default/tomcat7
      cp /vagrant/config-files/proxy.properties.default /vagrant/sesame-databases/openrdf-sesame/conf
 
@@ -29,7 +31,7 @@ if [ -f "/vagrant/downloads/openrdf-sesame-2.8.6-sdk.zip" ]; then
      # Create the repository (requires tomcat7 to be running)
      pushd ../sesame-databases
       sleep 10;
-      /vagrant/downloads/openrdf-sesame-2.8.6/bin/console.sh -s "http://localhost:8080/openrdf-sesame" <<EOF
+      /vagrant/downloads/openrdf-sesame-${SESAME_VERSION}/bin/console.sh -s "http://localhost:8080/openrdf-sesame" <<EOF
 create memory
 unifiedviews
 UnifiedViews Repository
@@ -42,5 +44,5 @@ EOF
      popd
     popd
 else
-    echo "***** SESAME openrdf-sesame-2.8.6-sdk.zip not downloaded"
+    echo "***** SESAME openrdf-sesame-${SESAME_VERSION}-sdk.zip not downloaded"
 fi    

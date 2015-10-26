@@ -7,16 +7,19 @@ export PATH="/vagrant:$PATH"
 #################################################################
 # This is the LATEST which has been tested (not always latest).
 
-BST_SESAME=yes
+REMOTE_RDFSTORE=stardog
+
 VERSION=2.1.3
 ODN_VERSION=1.1.3
 
 #################################################################
 # Standard System Updates.
-apt-get install -y dkms linux-generic \
-	virtualbox-guest-dkms virtualbox-guest-x11
+apt-get install -y dkms
+apt-get -y update 
+apt-get install -y linux-generic \
+	virtualbox-guest-dkms # virtualbox-guest-x11
 apt-get install -y apache2 libapache2-mod-auth-cas \
-	debconf-utils dpkg-dev build-essential quilt gdebi 
+	debconf-utils dpkg-dev build-essential quilt # gdebi 
 
 #################################################################
 # Install docker stuff
@@ -27,8 +30,7 @@ apt-get install -y docker.io
 # Now start to setup for building unified views, etc.
 apt-get install -y ntp                              # Time Server
 apt-get install -y openjdk-7-jre openjdk-7-jdk
-apt-get install -y tomcat7 git maven bash emacs nano vim
-apt-get install -y firefox dos2unix
+apt-get install -y tomcat7 git maven bash emacs nano vim firefox dos2unix
 # Make sure clean
 dos2unix /vagrant/config-files/*
 # echo "JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64" >> /etc/default/tomcat7
@@ -112,7 +114,7 @@ sed -iBAC -e 's/sk/en/g' /etc/unifiedviews/*.properties
 bash /usr/share/unifiedviews/dist/plugins/deploy-dpus.sh
 
 # Make sure nothing missing ...
-apt-get -f -y install 
+apt-get -f -y install
 
 #################################################################
 # Enable CORS on the virtuoso endpoint(requires running docker)
@@ -132,10 +134,12 @@ docker exec -i my-virtuoso isql-v -U dba -P root < /vagrant/config-files/CORS.sq
 bootstrap-yasgui.sh
 
 ###############################################################
-if [ "${BST_SESAME}" = "yes" ]; then
-    bootstrap-sesame.sh
-fi
-
+case ${REMOTE_RDFSTORE} in
+      sesame) bootstrap-sesame.sh ;;
+     stardog) bootstrap-stardog.sh ;;
+           *) echo "**** default localRDF will be used"
+esac
+    
 ###############################################################
 # Allows login without password
 echo "vagrant ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/vagrant
@@ -146,6 +150,8 @@ echo "***** Setup homepage for browser"
 echo "user_pref(\"browser.startup.homepage\", \"file:///vagrant/homepage.html\");" >> /etc/firefox/pref/syspref.js
 echo "user_pref(\"browser.startup.homepage\", \"file:///vagrant/homepage.html\");" >> /etc/firefox/syspref.js
 
+###############################################################
+# Install the plugin environment.
 if [ ! -d "/vagrant/Plugin-DevEnv" ]; then
     ( cd /vagrant ; git clone https://github.com/UnifiedViews/Plugin-DevEnv.git )
     ( cd /vagrant/Plugin-DevEnv ; mvn install )
