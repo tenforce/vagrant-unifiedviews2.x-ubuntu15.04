@@ -7,19 +7,18 @@ export PATH="/vagrant:$PATH"
 #################################################################
 # This is the LATEST which has been tested (not always latest).
 
-REMOTE_RDFSTORE=stardog
+REMOTE_RDFSTORE=sesame
 
 VERSION=2.1.3
 ODN_VERSION=1.1.3
 
 #################################################################
 # Standard System Updates.
-apt-get install -y dkms
+# apt-get install -y dkms
 apt-get -y update 
-apt-get install -y linux-generic \
-	virtualbox-guest-dkms # virtualbox-guest-x11
+# apt-get install -y linux-generic virtualbox-guest-dkms
 apt-get install -y apache2 libapache2-mod-auth-cas \
-	debconf-utils dpkg-dev build-essential quilt # gdebi 
+	debconf-utils dpkg-dev build-essential quilt gdebi 
 
 #################################################################
 # Install docker stuff
@@ -97,7 +96,7 @@ apt-get -y --force-yes install unifiedviews-mysql=${VERSION} \
 	unifiedviews-webapp-shared=${VERSION} \
 	unifiedviews-webapp-mysql=${VERSION} \
 	unifiedviews-webapp=${VERSION} \
-	unifiedviews-plugins=${VERSION}
+	unifiedviews-plugins=2.2.0
    # PREVENT UPDATING (at present)
 apt-mark hold unifiedviews-mysql unifiedviews-backend-shared \
 	 unifiedviews-backend-mysql unifiedviews-backend \
@@ -106,7 +105,8 @@ apt-mark hold unifiedviews-mysql unifiedviews-backend-shared \
 
 # Some additional packages for accessing CKAN
 apt-get -y --force-yes install odn-uv-plugins=${ODN_VERSION}
-apt-mark hold odn-uv-plugins
+apt-get -y --force-yes install unifiedviews-qa-plugins=2.2.0
+apt-mark hold odn-uv-plugins 
 
 # Change the env (language changed to english :-))
 sed -iBAC -e 's/sk/en/g' /etc/unifiedviews/*.properties

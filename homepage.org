@@ -85,6 +85,11 @@ accounts, public passwords, etc.
   - Login account  : /admin/
   - Login password : /admin/
 
+- Mysql :
+
+  - Login account  : /root/
+  - LOgin password : /root/
+
 * DPU Development
 
 In the /vagrant directory, the Plugin-DevEnv is also cloned from the
