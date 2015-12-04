@@ -25,11 +25,15 @@ apt-get install -y apache2 libapache2-mod-auth-cas \
 apt-get install -y apparmor lxc cgroup-lite
 apt-get install -y docker.io
 
+# Add user to doker grup.
+usermod -aG docker ${USER}
+systemctl start docker
+
 #################################################################
 # Now start to setup for building unified views, etc.
 apt-get install -y ntp                              # Time Server
 apt-get install -y openjdk-7-jre openjdk-7-jdk
-apt-get install -y tomcat7 git maven bash emacs nano vim firefox dos2unix
+apt-get install -y tomcat7 git maven bash emacs nano vim dos2unix
 # Make sure clean
 dos2unix /vagrant/config-files/*
 # echo "JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64" >> /etc/default/tomcat7
@@ -37,6 +41,12 @@ dos2unix /vagrant/config-files/*
 echo "deb http://packages.comsode.eu/debian wheezy main" > /etc/apt/sources.list.d/odn.list
 wget -O - http://packages.comsode.eu/key/odn.gpg.key | apt-key add -
 apt-get update -y --force-yes
+
+###############################################################
+# Install desktop
+apt-get -y install ubuntu-gnome-desktop firefox
+service gdm restart
+dpkg-reconfigure gdm
 
 ###############################################################
 # http://www.oracle.com/technetwork/database/features/jdbc/default-2280470.html
@@ -67,12 +77,6 @@ echo "unifiedviews-webapp-mysql       frontend/mysql_db_user string root"| debco
 echo "unifiedviews-backend-mysql      backend/mysql_root password root"| debconf-set-selections
 echo "unifiedviews-backend-mysql      backend/mysql_db_password password root"| debconf-set-selections
 echo "unifiedviews-backend-mysql      backend/mysql_db_user string root"| debconf-set-selections
-
-#################################################################
-# DB installations, etc which have customised values.
-echo "**** Create Virtuoso Docker named image"
-usermod -aG docker ${USER}
-systemctl start docker
 
 #################################################################
 # Make sure the docker is defined as a service
@@ -125,10 +129,11 @@ apt-get -f -y install
 echo "***** Update CORS and setup YASGUI"
 until [ "`/usr/bin/docker inspect -f {{.State.Running}} my-virtuoso`" == "true" ]; do
     echo -n "***** waiting for my-virtuoso to start - sleep 10"
-    sleep 10;
+    sleep 20;
 done
 sleep 1m;
 # my-virtuoso should have been started now, so enable CORS
+
 docker exec -i my-virtuoso isql-v -U dba -P root < /vagrant/config-files/CORS.sql
 # YASGUI required CORS to be enables.
 bootstrap-yasgui.sh

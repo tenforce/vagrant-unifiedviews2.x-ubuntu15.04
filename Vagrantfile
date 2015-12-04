@@ -2,9 +2,6 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "boxcutter/ubuntu1504-desktop"
-  config.vm.synced_folder ".", "/vagrant"
-
   # This will attempt to cache downloaded files (only if plugin is
   # present).
   
@@ -12,6 +9,8 @@ Vagrant.configure(2) do |config|
      config.cache.scope = :box
   end
 
+  config.vm.box = "boxcutter/ubuntu1504"
+  config.vm.synced_folder ".", "/vagrant"
   config.vm.provision :shell, path: "bootstrap.sh", binary: false
 
   # Default provider setup
@@ -33,6 +32,4 @@ Vagrant.configure(2) do |config|
   config.vm.provider :libvirt do |libvirt|
       libvirt.host = "VagrantUnifiedView2.x-Ubuntu15.04"
   end
-
-  
 end
