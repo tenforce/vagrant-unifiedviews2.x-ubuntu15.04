@@ -14,9 +14,8 @@ ODN_VERSION=1.1.3
 
 #################################################################
 # Standard System Updates.
-# apt-get install -y dkms
-apt-get -y update 
-# apt-get install -y linux-generic virtualbox-guest-dkms
+apt-get -y update
+apt-get install -y dkms virtualbox-guest-dkms linux-generic
 apt-get install -y apache2 libapache2-mod-auth-cas \
 	debconf-utils dpkg-dev build-essential quilt gdebi 
 

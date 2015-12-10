@@ -12,7 +12,7 @@ ExecStart=/usr/bin/docker run --name my-virtuoso -p 8890:8890 -p 1111:1111 \
        -e DBA_PASSWORD=root -e SPARQL_UPDATE=true \
        -e DEFAULT_GRAPH=http://localhost:8890/DAV \
        -v /vagrant/virtuoso/db:/var/lib/virtuoso/db tenforce/virtuoso
-ExecStop=/usr/bin/docker stop -a my-virtuoso
+ExecStop=/usr/bin/docker stop my-virtuoso
 
 [Install]
 WantedBy=multi-user.target
