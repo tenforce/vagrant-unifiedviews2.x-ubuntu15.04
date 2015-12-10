@@ -143,7 +143,13 @@ case ${REMOTE_RDFSTORE} in
      stardog) bootstrap-stardog.sh ;;
            *) echo "**** default localRDF will be used"
 esac
-    
+
+###############################################################
+if ! hash logrotate 2>/dev/null; then
+    apt-get install -y logrotate
+fi
+echo "INFO: setup Logrotate - not yet"
+
 ###############################################################
 # Allows login without password
 echo "vagrant ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/vagrant
