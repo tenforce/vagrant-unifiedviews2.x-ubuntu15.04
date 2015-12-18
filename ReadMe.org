@@ -2,8 +2,8 @@
 
 * Introduction
 This will build an Ubuntu 15.04 based VM including the latest 2.x
-version of the [[http://unifiedviews.eu/][UnifiedViews]] packages which has been tested. The system
-will run the following main software components:
+version of the [[http://unifiedviews.eu/][UnifiedViews]] packages *which has been tested*. The
+system will run the following main software components:
 
 - Ubuntu 15.04
 - Unified Views 2.1.3 ([[https://github.com/UnifiedViews][Github]])
@@ -75,3 +75,6 @@ Then it should be possible to use the virtual machine:
   connections settings sometimes cause problems (*halt*, wait a while
   and *up* again, normally clears the problem).
 - some freezes have been observed.
+- a script has been added in unifiedviews-system/build-2.3.0.sh which
+  will build all the necessary packages (for the next version). Read the 
+  script for what it does (this is for testing only).
