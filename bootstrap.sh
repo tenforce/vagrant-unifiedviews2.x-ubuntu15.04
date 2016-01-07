@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 #################################################################
 # Install the necessary components for unifiedviews (packages used)
 
@@ -9,8 +9,15 @@ export PATH="/vagrant:$PATH"
 
 REMOTE_RDFSTORE=sesame
 
-VERSION=2.1.3
+VERSION=2.3.0~
 ODN_VERSION=1.1.3
+
+#################################################################
+# Us to test if a package is installed or not.
+
+package_exists () {
+    return dpkg -l $1 &> /dev/null
+}
 
 #################################################################
 # Standard System Updates.
@@ -37,12 +44,31 @@ apt-get install -y tomcat7 git maven bash emacs nano vim dos2unix
 dos2unix /vagrant/config-files/*
 # echo "JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64" >> /etc/default/tomcat7
 
-echo "deb http://packages.comsode.eu/debian wheezy main" > /etc/apt/sources.list.d/odn.list
-wget -O - http://packages.comsode.eu/key/odn.gpg.key | apt-key add -
+#################################################################
+# Setup the repositories
+#
+
+if [ -d "/vagrant/unifiedvuews-system/Packages" ]
+then
+    echo "deb file://vagrant/unifiedviews-system debs/" > /etc/apt/sources.list.d/local.list
+fi
+
+if [ "${VERSION}" = "2.1.0" ]
+then
+    echo "deb http://packages.comsode.eu/debian wheezy main" > /etc/apt/sources.list.d/odn.list
+    wget -O - http://packages.comsode.eu/key/odn.gpg.key | apt-key add -
+elif [ "${VERSION}" = "2.3.0~" ]
+then
+    echo "deb http://packages.unifiedviews.eu/debian wheezy main" > /etc/apt/sources.list.d/unifiedviews.list
+    wget -O - http://packages.unifiedviews.eu/key/unifiedviews.gpg.key | apt-key add -
+else
+    echo "not handled version - ${VERSION}"
+    exit -1;
+fi    
 apt-get update -y --force-yes
 
 ###############################################################
-# Install desktop
+# Install desktop (with firefox)
 apt-get -y install ubuntu-gnome-desktop firefox
 service gdm restart
 dpkg-reconfigure gdm
@@ -92,24 +118,30 @@ apt-get update -y --force-yes
 
 ###############################################################
 # Unified views pulling, packaging and hopefully the installation.
+
+PLUGINS=unifiedviews-plugins
 apt-get -y --force-yes install unifiedviews-mysql=${VERSION} \
 	unifiedviews-backend-shared=${VERSION} \
 	unifiedviews-backend-mysql=${VERSION} \
 	unifiedviews-backend=${VERSION} \
 	unifiedviews-webapp-shared=${VERSION} \
 	unifiedviews-webapp-mysql=${VERSION} \
-	unifiedviews-webapp=${VERSION} \
-	unifiedviews-plugins=2.2.0
-   # PREVENT UPDATING (at present)
+	unifiedviews-webapp=${VERSION} ${PLUGINS}
+
+# PREVENT UPDATING (at present)
 apt-mark hold unifiedviews-mysql unifiedviews-backend-shared \
 	 unifiedviews-backend-mysql unifiedviews-backend \
 	 unifiedviews-webapp-shared unifiedviews-webapp-mysql \
-	 unifiedviews-webapp unifiedviews-plugins 
+	 unifiedviews-webapp ${PLUGINS}
 
 # Some additional packages for accessing CKAN
-apt-get -y --force-yes install odn-uv-plugins=${ODN_VERSION}
-apt-get -y --force-yes install unifiedviews-qa-plugins=2.2.0
-apt-mark hold odn-uv-plugins 
+
+if [ "${VERSION}" = "2.1.0" ]
+then
+    apt-get -y --force-yes install odn-uv-plugins=${ODN_VERSION}
+    apt-get -y --force-yes install unifiedviews-qa-plugins=2.2.0
+    apt-mark hold odn-uv-plugins
+fi
 
 # Change the env (language changed to english :-))
 sed -iBAC -e 's/sk/en/g' /etc/unifiedviews/*.properties
@@ -120,11 +152,18 @@ bash /usr/share/unifiedviews/dist/plugins/deploy-dpus.sh
 apt-get -f -y install
 
 #################################################################
+# Check that unifiedviews installed correctly.
+# if ! package_exists ${PLUGINS} ; then
+#    echo "package installation failed for "  ${PLUGINS} "!!"
+#    exit -1;
+# fi
+
+#################################################################
 # Enable CORS on the virtuoso endpoint(requires running docker)
 #
 # Note: Building/starting up the virtuoso docker image can take a
-# while, hence the wait here for it to go into a running state.
-#
+# "while", hence the wait here for it to go into a running state.
+
 echo "***** Update CORS and setup YASGUI"
 until [ "`/usr/bin/docker inspect -f {{.State.Running}} my-virtuoso`" == "true" ]; do
     echo -n "***** waiting for my-virtuoso to start - sleep 10"

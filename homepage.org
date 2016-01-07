@@ -5,7 +5,7 @@
 * Introduction
 
 The following tools are included in this development environment. It
-has the following main entry point - *[[http://localhost:28080/unifiedviews][Unified Views 2.1.3]]*. Other
+has the following main entry point - *[[http://localhost:28080/unifiedviews][Unified Views 2.3.0~]]*. Other
 tools which maybe accessible (if configured) are:
 
 - *Yasgui* ::
@@ -49,20 +49,25 @@ accounts, public passwords, etc.
 
 * Environment Details
   
-| *Component*    | *Version* | *Pointer*                               | *Notes*                         |
-|----------------+-----------+-----------------------------------------+---------------------------------|
-| Ubuntu         |     15.04 | [[http://releases.ubuntu.com/15.04/]]       | 64 bit                          |
-| UnifiedViews   |     2.1.3 | [[http://unifiedviews.eu/]]                 | Packages Installed              |
-| Virtuoso       |         7 | [[http://virtuoso.openlinksw.com]]          | tenforce/docker-virtuoso [fn:2] |
-| MySQL          |       5.6 | [[http://dev.mysql.com/doc/refman/5.6/en/]] |                                 |
-| Firefox        |           |                                         |                                 |
-| Java           |       1.7 |                                         |                                 |
-| Tomcat         |         7 |                                         |                                 |
-| Maven          |           |                                         |                                 |
-| Docker         |           |                                         | [fn:3]                          |
-| Sesame         |     2.8.1 | [[http://rdf4j.org/]]                       | [fn:1]                          |
-| Stardog        |       4.0 |                                         | [fn:4]                                |
-| common editors |         - |                                         | emacs, vim, nano                |
+| *Component*          | *Version* | *Pointer*                               | *Notes*                         |
+|----------------------+-----------+-----------------------------------------+---------------------------------|
+| Ubuntu               |     15.04 | [[http://releases.ubuntu.com/15.04/]]       | 64 bit                          |
+| UnifiedViews         |    2.3.0~ | [[http://unifiedviews.eu/]]                 | Packages Installed              |
+| UnifiedViews-Plugins |     2.2.1 |                                         | Plugin package installed        |
+| Virtuoso             |         7 | [[http://virtuoso.openlinksw.com]]          | tenforce/docker-virtuoso [fn:2] |
+| MySQL                |       5.6 | [[http://dev.mysql.com/doc/refman/5.6/en/]] |                                 |
+| Firefox              |           |                                         |                                 |
+| Java                 |       1.7 |                                         |                                 |
+| Tomcat               |         7 |                                         |                                 |
+| Maven                |           |                                         |                                 |
+| Docker               |           |                                         | [fn:3]                          |
+| Sesame               |     2.8.1 | [[http://rdf4j.org/]]                       | [fn:1]                          |
+| Stardog              |       4.0 |                                         | [fn:4]                          |
+| common editors       |         - |                                         | emacs, vim, nano                |
+
+** Updating Packages
+It is possible rebuild the packages from source, using the script
+found in the unifiedviews-system directory.
 
 * Account Details
 - [[http://localhost:28080/unifiedviews][Unified Views Account Details]] ::
